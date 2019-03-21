@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./configs/passport');
 
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -9,7 +10,8 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const cors         = require("cors");
-
+const session       = require('express-session');
+const passport      = require('passport');
 
 mongoose
   .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
@@ -45,6 +47,15 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+//Manejo de Sesion
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // default value for title local
@@ -63,5 +74,11 @@ app.use('/', index);
 
 const apis = require("./routes/articulos-routes")
 app.use("/api", apis)
+
+const authRoutes = require('./routes/auth-routes');
+app.use('/api', authRoutes);
+
+const tutoresRoutes = require('./routes/tutores-routes');
+app.use('/api', tutoresRoutes);
 
 module.exports = app;
