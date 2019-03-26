@@ -70,7 +70,7 @@ app.use(cors({
 // ROUTES MIDDLEWARE STARTS HERE:
 
 const index = require('./routes/index');
-app.use('/', index);
+app.use('/api', index);
 
 const apis = require("./routes/articulos-routes")
 app.use("/api", apis)
@@ -80,5 +80,8 @@ app.use('/api', authRoutes);
 
 const tutoresRoutes = require('./routes/tutores-routes');
 app.use('/api', tutoresRoutes);
+
+const comunRoutes = require("./routes/comun-routes")
+app.use("/api", comunRoutes)
 
 module.exports = app;

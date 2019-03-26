@@ -6,18 +6,20 @@ const bcrypt     = require('bcryptjs');
 
 const User       = require('../models/user-model');
 
-
+///////////POST////////////////////
 authRoutes.post('/signup', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
+
+    console.log("Entra a signup")    
   
     if (!username || !password) {
-      res.status(400).json({ message: 'Introduce Usuario y Password' });
-      return;
+        res.status(400).json({ message: 'Introduce Usuario y Password' });
+        return;
     }
 
     if(password.length < 7){
-        res.status(400).json({ message: 'Por seguridad tu Password debe ser al menos de 8 caracteres.' });
+        res.status(401).json({ message: 'Por seguridad tu Password debe ser al menos de 8 caracteres.' });
         return;
     }
   
@@ -29,7 +31,7 @@ authRoutes.post('/signup', (req, res, next) => {
         }
 
         if (foundUser) {
-            res.status(400).json({ message: 'Usuario existente. Pruebe con algun otro.' });
+            res.status(402).json({ message: 'Usuario existente. Pruebe con algun otro.' });
             return;
         }
   
@@ -43,7 +45,7 @@ authRoutes.post('/signup', (req, res, next) => {
   
         aNewUser.save(err => {
             if (err) {
-                res.status(400).json({ message: 'No se pudo grabar el Usuario en la base de datos.' });
+                res.status(403).json({ message: 'No se pudo grabar el Usuario en la base de datos.' });
                 return;
             }
             
@@ -97,7 +99,34 @@ authRoutes.post('/logout', (req, res, next) => {
     res.status(200).json({ message: 'Log out success!' });
 });
 
+authRoutes.post('/updatepassword', (req, res, next) => {
+    const password = req.body.password;
+    const username = req.body.username;
+    const salt     = bcrypt.genSaltSync(10);
+    const hashPass = bcrypt.hashSync(password, salt);
 
+    User.updateOne({"username": username},{$set:{password: hashPass}})
+    .then( () =>{
+        res.status(200).json({ message: 'Update success!' });
+    })
+    .catch(err=>console.log(err))
+});
+
+authRoutes.post('/recuperaUsuario', (req, res, next) => { 
+    const username = req.body.username;
+    User.find({username: username})
+      .then(usuario =>{
+        if(usuario.length > 0)
+            res.status(200).json(usuario[0]);
+        else
+            res.status(200).json({ message: 'No existe correo electronico. Favor de validar!'});
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  });
+
+//////////////////GET///////////////
 authRoutes.get('/loggedin', (req, res, next) => {
     // req.isAuthenticated() is defined by passport
     if (req.isAuthenticated()) {
@@ -106,6 +135,5 @@ authRoutes.get('/loggedin', (req, res, next) => {
     }
     res.status(403).json({ message: 'Unauthorized' });
 });
-
 
 module.exports = authRoutes;
