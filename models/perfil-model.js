@@ -14,12 +14,14 @@ const perfilSchema = new Schema({
   },
   usuario_id: {type: Schema.ObjectId, ref: "User"},
   hangouts: String,
-  Skype: String,
+  skype: String,
   notificacionEmail: String,
   tipoUsuario: String,
   ranking: Number,
   materias:[{type: Schema.ObjectId, ref: "Materia"}],
-  Direccion: String
+  direccion: String,
+  altitud: String,
+  latitud: String
 }, 
 {
   timestamps: true
