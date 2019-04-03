@@ -33,6 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -54,16 +55,16 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 app.use(cors({
-  credential: true,
+  credential: false,
   origin: [process.env.REACT_APP_CLIENT_URL]
 }))
 

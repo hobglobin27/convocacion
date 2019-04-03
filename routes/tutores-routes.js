@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Perfil = require('../models/perfil-model')
+const Perfil = require('../models/user-model')
 
 
 const router  = express.Router();
@@ -18,7 +18,7 @@ router.get('/toptutores', (req, res, next) => {
 });
 
 router.get('/totaltutores', (req, res, next) => { 
-  Perfil.find({tipoUsuario: "T"}).count().limit(12)
+  Perfil.find({tipoUsuario: "T"}).countDocuments().limit(12)
     .then(perfil =>{
       console.log(perfil)
       res.json(perfil);
