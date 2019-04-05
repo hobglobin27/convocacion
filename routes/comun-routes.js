@@ -26,8 +26,8 @@ router.post('/send-email', (req, res, next) => {
   
 });
 
-router.post('/upload/pictures/add/user/:idUser', parser.single('picture'), (req, res, next) => {
-  const idUser = req.params.idUser;
+router.post('/upload/pictures', parser.single('picture'), (req, res, next) => {
+  /*const idUser = req.params.idUser;
   let fotos={
     nombre: req.file.originalname,
     path: req.file.url,
@@ -46,15 +46,16 @@ router.post('/upload/pictures/add/user/:idUser', parser.single('picture'), (req,
     })
     .catch(error => console.log(error))
   })
-  .catch(error => console.log(error))
+  .catch(error => console.log(error))*/
+  res.json({
+    success: true,
+    pictureUrl: req.file.url
+  })
 });
 
 router.post('/removeimage/:id', (req, res, next) => {
   const nombre=req.body.name;
   const idUsuario=req.params.id;
-
-  console.log("nombre: ", nombre);
-  console.log("usuario: ", idUsuario);
 
   User.findById({_id: idUsuario })
   .then(user =>{

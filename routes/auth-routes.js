@@ -65,7 +65,6 @@ authRoutes.post('/signup', (req, res, next) => {
 });
 
 authRoutes.post('/login', (req, res, next) => {
-    console.log(req);
     passport.authenticate('local', (err, theUser, failureDetails) => {
         if (err) {
             res.status(500).json({ message: 'No se pudo autenticar el Usuario' });

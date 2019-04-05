@@ -9,6 +9,7 @@
   materno: String,
   genero: String,
   fotos: [{
+    uid: String,
     nombre: String,
     path: String,
     originalNombre: String
@@ -19,9 +20,7 @@
   tipoUsuario: String,
   ranking: Number,
   materias:[{type: Schema.ObjectId, ref: "Materia"}],
-  direccion: String,
-  altitud: String,
-  latitud: String
+  direccion: String
  }, 
  {
   timestamps: true
