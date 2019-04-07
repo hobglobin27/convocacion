@@ -68,18 +68,6 @@ app.use(cors({
   origin: '*'
 }))
 
-app.use((req, res, next) =>{
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  req.header('Access-Control-Allow-Origin', '*');
-  req.header('Access-Control-Allow-Headers', '*');
-  if(req.method === 'OPTIONS'){
-  res.headers('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE');
-  return res.status(200).json({})
-  }
-   next();
-  });
-
 // ROUTES MIDDLEWARE STARTS HERE:
 
 const index = require('./routes/index');
