@@ -65,7 +65,7 @@ app.locals.title = 'Express - Generated with IronGenerator';
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 app.use(cors({
   credential: true,
-  origin: [process.env.REACT_APP_CLIENT_URL]
+  origin: '*'
 }))
 
 app.use((req, res, next) =>{
