@@ -28,7 +28,7 @@ router.get('/totaltutores', (req, res, next) => {
 
 router.get('/buscatutores/materia', (req, res, next) => {
   const materia = req.query.materia;
-  User.find({materias: materia})
+  User.find({tipoUsuario: "T", materias: materia})
     .then(usuario =>{
       res.json(usuario);
     })
@@ -39,7 +39,7 @@ router.get('/buscatutores/materia', (req, res, next) => {
 
 router.get('/buscatutores/direccion', (req, res, next) => {
   const direccion = req.query.direccion;
-  User.find({direccionesAlternas: direccion})
+  User.find({tipoUsuario: "T", direccionesAlternas: direccion})
     .then(usuario =>{
       res.json(usuario);
     })
@@ -51,7 +51,7 @@ router.get('/buscatutores/direccion', (req, res, next) => {
 router.get('/buscatutores/direccionmateria', (req, res, next) => {
   const direccion = req.query.direccion;
   const materia = req.query.materia;
-  User.find({direccionesAlternas: direccion, materias: materia})
+  User.find({tipoUsuario: "T", direccionesAlternas: direccion, materias: materia})
     .then(usuario =>{
       res.json(usuario);
     })
