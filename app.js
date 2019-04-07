@@ -68,6 +68,12 @@ app.use(cors({
   origin: [process.env.REACT_APP_CLIENT_URL]
 }))
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // ROUTES MIDDLEWARE STARTS HERE:
 
 const index = require('./routes/index');
