@@ -19,8 +19,9 @@
   notificacionEmail: String,
   tipoUsuario: String,
   ranking: Number,
-  materias:[{type: Schema.ObjectId, ref: "Materia"}],
-  direccion: String
+  materias:[],
+  direccion: String,
+  direccionesAlternas: []
  }, 
  {
   timestamps: true

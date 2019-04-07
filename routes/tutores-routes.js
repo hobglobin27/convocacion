@@ -26,14 +26,48 @@ router.get('/totaltutores', (req, res, next) => {
     })
 });
 
-router.get('/materias', (req, res, next) => { 
-  Materia.find()
-    .then(materia =>{
-      res.json(materia);
+router.get('/buscatutores/materia', (req, res, next) => {
+  const materia = req.query.materia;
+  User.find({materias: materia})
+    .then(usuario =>{
+      res.json(usuario);
     })
     .catch(err =>{
       console.log(err)
     })
+});
+
+router.get('/buscatutores/direccion', (req, res, next) => {
+  const direccion = req.query.direccion;
+  User.find({direccionesAlternas: direccion})
+    .then(usuario =>{
+      res.json(usuario);
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+});
+
+router.get('/buscatutores/direccionmateria', (req, res, next) => {
+  const direccion = req.query.direccion;
+  const materia = req.query.materia;
+  User.find({direccionesAlternas: direccion, materias: materia})
+    .then(usuario =>{
+      res.json(usuario);
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+});
+
+router.get('/materias', (req, res, next) => { 
+  Materia.find()
+  .then(materia =>{
+    res.json(materia);
+  })
+  .catch(err =>{
+    console.log(err)
+  })
 });
 
 module.exports = router;
