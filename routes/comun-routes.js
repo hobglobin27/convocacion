@@ -48,6 +48,7 @@ router.post('/upload/pictures', parser.single('picture'), (req, res, next) => {
     .catch(error => console.log(error))
   })
   .catch(error => console.log(error))*/
+  console.log("Este es el res de upload:", res.header)
   res.json({
     success: true,
     pictureUrl: req.file.url

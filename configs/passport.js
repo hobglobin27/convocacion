@@ -24,11 +24,11 @@
        return;
      }
      if (!foundUser) {
-       next(null, false, { message: 'Incorrect username.' });
+       next(null, false, { message: 'Usuario Incorrecto.' });
        return;
      }
      if (!bcrypt.compareSync(password, foundUser.password)) {
-       next(null, false, { message: 'Incorrect password.' });
+       next(null, false, { message: 'Password incorrecto.' });
        return;
      }
      next(null, foundUser);
