@@ -51,6 +51,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 //Manejo de Sesion
 app.use(session({
   secret: process.env.SESSION_SECRET,
+  cookie  : { maxAge  : new Date(Date.now() + (60 * 1000 * 30)) },
   resave: true,
   saveUninitialized: true
 }));

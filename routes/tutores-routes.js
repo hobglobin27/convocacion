@@ -7,7 +7,7 @@ const router  = express.Router();
 
 // GET route => to get all the projects
 router.get('/toptutores', (req, res, next) => { 
-  User.find({tipoUsuario: "T"}).limit(12)
+  User.find({tipoUsuario: "T"}).limit(7)
     .then(usuario =>{
       res.json(usuario);
     })
@@ -17,7 +17,7 @@ router.get('/toptutores', (req, res, next) => {
 });
 
 router.get('/totaltutores', (req, res, next) => { 
-  User.find({tipoUsuario: "T"}).countDocuments().limit(12)
+  User.find({tipoUsuario: "T"}).countDocuments()
     .then(usuario =>{
       res.json(usuario);
     })
