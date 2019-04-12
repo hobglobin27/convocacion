@@ -10,6 +10,8 @@ const grupoSchema = new Schema({
  }],
  materias: [],
  idUsuario: {type: Schema.ObjectId, ref: "User"},
+ aceptado: String,
+ terminado: String
 }, 
 {
  timestamps: true

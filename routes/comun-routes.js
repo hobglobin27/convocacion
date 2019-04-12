@@ -116,7 +116,8 @@ router.post('/actualizaperfil', (req, res, next) => {
       dataGrupo.forEach(grupo => {
         const newGrupo = new Grupo({
                                     idUsuario   : idUsuario,
-                                    nombreGrupo : grupo
+                                    nombreGrupo : grupo,
+                                    aceptado: "N"
                                   });
     
         newGrupo.save()
@@ -141,6 +142,29 @@ router.get('/direccionesalternas', (req, res, next) => {
     console.log(err)
   })
 });
+
+router.get('/grupospendientes/:idusuario', (req, res, next) => {
+  const idUsuario = req.params.idusuario
+  Grupo.find({ idUsuario: idUsuario, aceptado: "N"})
+  .then(grupos =>{
+    res.json(grupos);
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+});
+
+router.get('/gruposasignados/:idusuario', (req, res, next) => {
+  const idUsuario = req.params.idusuario
+  Grupo.find({ idUsuario: idUsuario, aceptado: "S"})
+  .then(grupos =>{
+    res.json(grupos);
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+});
+
 
 module.exports = router;
 
