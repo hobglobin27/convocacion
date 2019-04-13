@@ -21,7 +21,8 @@
   ranking: Number,
   materias:[],
   direccion: String,
-  direccionesAlternas: []
+  direccionesAlternas: [],
+  grupos: []
  }, 
  {
   timestamps: true

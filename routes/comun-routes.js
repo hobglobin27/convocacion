@@ -109,6 +109,7 @@ router.post('/actualizaperfil', (req, res, next) => {
                                             tipoUsuario: tipoUsuario,
                                             materias: materias,
                                             direccion: direccion,
+                                            grupos: dataGrupo,
                                             direccionesAlternas: direccionesAlternas
                                           }})
   .then((user) => {
